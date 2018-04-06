@@ -1,13 +1,25 @@
 import React from 'react'
 import SenData from './senators'
+import Template from './Template'
 
-export default class Main extends React.Component{  //this is the scope of the class
+
+
+//this is the scope of the class
+export default class Main extends React.Component{
+
+    state = { showpol: false }
+
     render(){
 
         const FilterRepublicans = () => {
             console.log("Hello from Republicans");
             console.log("All Records: ", SenData)
             const RepSen = SenData.filter( (politician) => { return politician.party === "Republican"  })
+
+
+            // const RepSen = numbers.map((numbers) =>
+            //     <li>{numbers}</li>
+            // );
             console.log(RepSen)  //this is step One of the assignment. Filter the Republican Senators.
 
             // console.log(SenData[176])
@@ -16,19 +28,35 @@ export default class Main extends React.Component{  //this is the scope of the c
         }
 
         const FilterDemocrats = () => {
-            const DemSen = SenData.filter( (politician) => { return politician.party === "Democrat"  })
+            const DemSen = SenData.filter((politician) => {
+                return politician.party === "Democrat"
+            })
             console.log(DemSen)  //this is step Two of the assignment. Filter the Democrat Senators.
+            this.setState({ showpol: DemSen })
+
+            return DemSen.map((politician) => {
+                return <template info={politician} />
+            })
+
         }
 
+
+
+
         const FilterUtahSenators = () => {
+            let UtSen
             const UtahSen = SenData.filter( (politician) => { return politician.state === "UT"  })
-            console.log(UtahSen)  //this is step Three of the assignment. Filter the Utah Senators.
+            UtahSen.map( senator => {
+            })
+
+            console.log(UtahSen)
+            // console.log(UtahSen)  //this is step Three of the assignment. Filter the Utah Senators.
         }
 
 
         const FilterUtahSenior = () => {
             const Senior = SenData.filter( (politician) => { return politician.description === "Senior Senator from Utah"  })
-            console.log(Senior)  //this is step Four of the assignment. Filter the Utah Senior Senators.
+            console.log(Senior[0].person.firstname)  //this is step Four of the assignment. Filter the Utah Senior Senators.
         }
 
 
@@ -38,6 +66,7 @@ export default class Main extends React.Component{  //this is the scope of the c
                 <hr/>
 
                 <button onClick={ FilterRepublicans} >Republicans</button>
+
                 <br></br>
 
                 <button onClick={ FilterDemocrats} >Democrats</button>
@@ -49,6 +78,8 @@ export default class Main extends React.Component{  //this is the scope of the c
                 <button onClick={ FilterUtahSenior } >Utah Senior Senator</button>
                 <br></br>
 
+                <hr/>
+                { this.state.showdem ? React.createElement(FilterDemocrats) : <div>No Data</div> }
 
             </div>
         )
