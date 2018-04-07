@@ -1,6 +1,7 @@
+/* this is me making notes.
 import React from 'react'
 import SenData from './senators'
-import Main from './Main'
+import Main from './2'
 
 
 export default class Profile extends React.Component{  //this is the scope of the class
@@ -38,3 +39,4 @@ const Parent = React.createClass({
         );
     }
 });
+*/
